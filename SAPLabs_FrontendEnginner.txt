@@ -4,5 +4,5 @@ Round 1:
 Explain JavaScript Closure with real world examples.
 Implement Singleton DP
 Design Patterns and Principles
-JavaScript Prototypes, IIFE, Hoisting, Promise, ES6
+JavaScript Prototypes, IIFE, Hoisting, Promise, Callback Functions, this keyword, ES6
 Event Loop, MicroTask Queue vs MacroTask Queue
