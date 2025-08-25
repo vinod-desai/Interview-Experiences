@@ -1,0 +1,18 @@
+Atlassian_PrincipalFrontendEngineerP60
+
+Round 1:
+Create Tabs design component using any frontend framework ReactJS/Angular?
+Write Clean and Maintainable production ready code.
+Write Unit Tests.
+Functionality:
+Click on Tab, it should display it's content and include tabId in the url to retain selected tab when user refreshers the page.
+
+Round 2:
+How can we collect huge amounts of events data from UI and send it to backend API?
+Time Based Approach -> Collect events over period of time (say 5 sec) and make the api call.
+Event Size Threshold -> Wait for event threashold to reach max (EVENT_THRESHOLD = 500) events and make the api call.
+Hybrid Approach -> Mix of time based collecting events and event threshold to send the data to backend.
+How can we send the collected data if user closes the browser window/app.
+
+Write clean, maintainable and production ready code.
+Write unit tests.
