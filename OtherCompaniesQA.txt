@@ -1,0 +1,111 @@
+// I do not know what I am doing!!
+
+@Bean
+
+public class CustomeCache {
+
+  // private static final List<String> cache = new ArrayList<>(); -> what is the issue, memory leakage;
+	private CustomeCache instance = null;
+	
+	private CustomeCache() {
+	}
+	
+	public static CustomeCache getInstance(){
+		
+		if(instance == null){
+			instance = new CustomeCache();
+		}
+		
+		return instance;
+	}
+
+    private HashMap<T1, T2> cache = new LinkedHashMap<>();
+	
+	int SIZE = 1000;
+	
+	// synchronized, collection.synchronized;
+    public void add(T1 key, T2 value) {
+        cache.add(data);
+    }
+	
+	public T2 get() {
+		
+	}
+	
+}
+
+oldest entry removed; -> LRU;
+
+
+Deployed -> ECS Fargate -> AutoScaling; multiple instance - chacheService
+
+
+cache1 - cache2; 
+
+Range1,2,3 - []; Redis Distributed Cache;
+
+Command Query - CQRS;
+
+
+Singleton;
+Facotry; 
+Adopter;
+Facade;
+Publish/Sub;
+Builder;
+Repositry;
+Strategy;
+
+Factory vs Strategy;
+
+
+Circuit Breaker -> Retry -> Saga - Choregraphy;
+
+Event Driven; Kafka MB;
+
+
+JavaScript/TypeScript;
+
+ES2025;
+
+Es6;
+
+JSON -> 
+
+userObj: User = {
+  name, 
+  id, 
+  address {
+		line1, line2, line3, city, state, country, pincode
+	}, 
+	personalInfo {firstName, lastName, prefferredName}
+}
+
+userObj.address.line2?city;
+
+any, unkown;
+
+type vs interfaces;
+
+ const val = multiply(2)(3)(4); // 24 -> multiply(2); -> 2;  multiply(2)(3)(4); -> 6
+ 
+ function multiply(a){
+	
+	return function (b) {
+		if(b) {
+			return multiply(a * b); 
+		} else {
+			return a;
+		}
+	
+	}
+ }
+ 
+ grant type in oauth2;
+ oauth2 working; SSO working;
+ identity providers -> SAML, Google, OpenID, Microsoft Entra ID, Facebook etc
+
+
+
+
+
