@@ -18,7 +18,11 @@ HLD - Design Hotel Reservation System; Creating UI for users, Admins, How to dif
 Choosing the tech stack for UI, APIs, Database
 Handling the concuurent requests - Redis TTL (Callback Function), DB Level Constraints;
 
+Angular vs ReactJS
+Angular Pipes, Pure Pipe vs Impure Pipe;
+Angular Component Communication;
 Web Browser/Mobile Browser cache limitation;
+Client Side Cache, Server Side Cache, CDN, etc
 
 Find out the top 10 hotels country wise, world wise etc - Leaderboard; Using Redis Sorted Order feature/Rockset DB as it is designed for aggregating the queries to find out the leaderboard data.
 
@@ -48,7 +52,7 @@ Round 5 - Architect Round - Java + HLD;
 Create Analytics System for Video Streaming Platform;
 Assume We already have services for uploading and viewing the videos on platform; Our task is to find out how long videos are viewed by users as this will help in creating the better content, ads revenue etc.
 Example: We have uploaded a video of length 3mins (180 seconds);
-User can watch it for 0sec, 10sec, 100sec, 180sec;
+User can watch it for 0sec, 10sec, 100sec, 180sec in any interval of time;
 User can watch video from 50sec to 100sec, 150sec to 180sec; (These video watch interval time can be of any range);
 
 Create API for logging the events:
