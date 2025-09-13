@@ -42,6 +42,7 @@ Questions on Circuit Breaker, Retry Design Pattern;
 Spring Cloud - cloud configuration management for storing the config data;
 
 Prod environment monitoring, P50, P95, P95 latency, Memory Management (Observability and Alerts);
+Use of AI/GenAI in day to day work, How it is helping? Code Review Process;
 
 Behavioural Questions - On Leadership, Motivation, How are you different from others, Mentoring, Balancing the Work and Family time, etc
 
@@ -83,5 +84,7 @@ Analytics:
 Top 10 Videos, Top 10 Channel, Top 10 Category, Location wise Analytics and Other buisness use cases;
 
 HLD:
-
 Client - API Gateway - Video Watch Log (Producers) Service - Kafka Event Streaming Platform - Video Watch Log (Consumers) Service - Write DB (Primary)/Read Replicas
+
+Code Review Considerations;
+Use of AI/GenAI in day to day work;
