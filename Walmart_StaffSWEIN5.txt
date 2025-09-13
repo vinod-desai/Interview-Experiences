@@ -1,0 +1,83 @@
+Walmart_Staff SWE/IN5
+
+In Person Interview - Initially Interview was scheduled for SSE/IN4 role.
+
+Round 1 - DSA:
+Order of package execution and detect cyclic dependency, similar to https://www.geeksforgeeks.org/dsa/detect-cycle-in-a-graph/
+Minimum Stack - https://leetcode.com/problems/min-stack/description/
+
+Round 2 - Java + LLD:
+Java 8 Features
+Thread States
+Design Principles and Design Patterns
+Migration of On-Premise app to cloud, Domain Driven Design, Strangler Pattern -> Different strategy for routing traffic like Canary deployment
+Amadeus CRS application - Transaction Count (TPS), Pods/Instance Count etc Number of Hotels/Properties, Concurrent Booking Requests, Payment Failure, Idempotency
+
+Round 3 - Frontend + HLD:
+HLD - Design Hotel Reservation System; Creating UI for users, Admins, How to differntiate between users/admins, How to verify Admins are valid users.
+Choosing the tech stack for UI, APIs, Database
+Handling the concuurent requests - Redis TTL (Callback Function), DB Level Constraints;
+
+Web Browser/Mobile Browser cache limitation;
+
+Find out the top 10 hotels country wise, world wise etc - Leaderboard; Using Redis Sorted Order feature/Rockset DB as it is designed for aggregating the queries to find out the leaderboard data.
+
+Round 4 - Hiring Manager Round:
+DSA - 2nd Largest element in any array - TC O(n), SC O(1)
+
+Optimising the API Latency (SLA 15ms);
+Optimising using DB Index, Query Execution Pattern, Write DB, Read Replica, Choosing the right DB (SQL, NoSQL) based on the use case.
+Caching Strategy;
+Optimisng the code in services/api layer;
+Memoization + In Memory Cache;
+Testing using JMeter with more load before moving code into Prod;
+Optimising the Request and Response Payload;
+Use gRPC communication protocol for inter microservice communication;
+
+Questions on Circuit Breaker, Retry Design Pattern;
+Spring Cloud - cloud configuration management for storing the config data;
+
+Prod environment monitoring, P50, P95, P95 latency, Memory Management (Observability and Alerts);
+
+Behavioural Questions - On Leadership, Motivation, How are you different from others, Mentoring, Balancing the Work and Family time, etc
+
+Later Recruiter Planned for Staff Software Engineer/IN5 role as my experience was 10+ years;
+
+Round 5 - Architect Round - Java + HLD;
+
+Create Analytics System for Video Streaming Platform;
+Assume We already have services for uploading and viewing the videos on platform; Our task is to find out how long videos are viewed by users as this will help in creating the better content, ads revenue etc.
+Example: We have uploaded a video of length 3mins (180 seconds);
+User can watch it for 0sec, 10sec, 100sec, 180sec;
+User can watch video from 50sec to 100sec, 150sec to 180sec; (These video watch interval time can be of any range);
+
+Create API for logging the events:
+POST /api/v1/watch-log
+[
+{
+	"video_id": 123,
+	"channel_id": mychannel,
+	"session_id": 
+	"device_id": "userId", // Client/UserID
+	"video_start_time": "0",
+	"video_end_time": "60",
+  "location": "India",
+  "categoryId": "Movie",
+	"date_time": CurrentTime
+}
+]
+
+Database Table - Video_Watch_Log;
+video_watch_log_id, video_id, channel_id, session_id, device_id, video_start_time, video_end_time, createddatetime, location, categoryId;
+
+SQL for calculating the anaytics:
+SELECT Count(*) FROM Video_Watch_Log
+WHERE GROUP BY video_id, ip_address_device_id
+HAVING video_start_time = startTime AND video_end_time <= endTime; 
+
+Analytics:
+Top 10 Videos, Top 10 Channel, Top 10 Category, Location wise Analytics and Other buisness use cases;
+
+HLD:
+
+Client - API Gateway - Video Watch Log (Producers) Service - Kafka Event Streaming Platform - Video Watch Log (Consumers) Service - Write DB (Primary)/Read Replicas
