@@ -1,0 +1,55 @@
+Vyapaar;
+
+Implement Observer DP;
+Diff Observer vs Pub/Sub;
+Choosing the TechStack, ReactJS vs Angular;
+Microfrontends communications;
+SQL vs NoSQL;
+
+In a company is building a notification system that needs to send updates to users through multiple channels (Email, SMS, Push Notifications, Slack, WhatsApp).
+Requirements:
+1. The system should be easily extendable – tomorrow a new channel (e.g., Telegram) should be added **without changing the core code**.
+2. Notifications can be **simple text**, or templated messages (with placeholders for username, order details, etc.).
+3. Different customers want different combinations of channels (one wants Email+SMS, another wants only Push).
+4. Some messages are urgent (should go via all channels instantly), while others are **informational** (only one channel is enough).
+
+SQL vs NoSQL, DB Schema, Design Patterns, etc
+
+ReactJS Coding Question;
+Create a simple list / table with multi-selection functionality
+Ability to check multiple rows and show a sample alert with names of checked rows
+You can fetch data from : https://dummyjson.com/products
+
+Folder/File Structure Component;
+https://mui.com/x/react-tree-view/
+
+Flaky Test;
+Duck Typing; Type vs Interfaces in Typescript;
+React Testing Library RTL; Mocking API Calls;
+UserEvent vs FireEvent; How to test CustomHook;
+React Testing Component Query in RTL;
+
+Java;
+class Main {
+    public static void main(String[] args) {
+        Parent obj = new Child();
+        ((MyInterface) obj).display(); // Child
+		    obj.display(); // Child
+    }
+}
+
+interface MyInterface {
+    void display();
+}
+
+class Parent implements MyInterface {
+    public void display(){
+        System.out.println("Parent");
+    }
+}
+
+class Child extends Parent {
+    public void display(){
+        System.out.println("Child");
+    }
+}
