@@ -1,3 +1,4 @@
+Company - IG Group;
 // I do not know what I am doing!!
 
 @Bean
@@ -105,7 +106,81 @@ type vs interfaces;
  oauth2 working; SSO working;
  identity providers -> SAML, Google, OpenID, Microsoft Entra ID, Facebook etc
 
+1. Java (Core + Advanced)
 
+Difference between HashMap, ConcurrentHashMap, and SynchronizedMap?
+
+How does Java Garbage Collection work?
+
+Volatile vs Synchronized vs Atomic Classes?
+
+How does CompletableFuture work?
+
+How do you detect and fix memory leaks?
+
+Scenario: Process millions of records efficiently in memory?
+
+2. Caching (Advanced)
+
+How would you cache frequently accessed slow DB endpoints?
+
+LRU Cache Implementation?
+
+Compare in-memory vs distributed cache?
+
+3. Spring Boot & Microservices
+
+How do you design a fault-tolerant microservice?
+
+Distributed transactions in microservices?
+
+Asynchronous processing in Spring Boot?
+
+Logging & monitoring?
+
+Scenario: Slow service affecting others?
+
+REST API design?
+
+4. REST API
+
+How to design REST APIs for high concurrency and low latency?
+
+How to secure REST APIs?
+
+How to handle large payloads?
+
+What is HATEOAS?
+
+5. AWS Basics
+
+High availability deployment strategy?
+
+Vertical vs Horizontal scaling?
+
+EC2 instance memory issue?
+
+Storage for large objects/files?
+
+6. TypeScript (Basic / Minimal)
+
+TypeScript vs JavaScript?
+
+Typing unknown JSON?
+
+Interfaces vs types?
+
+7. Design & Architecture 
+
+How do you design a scalable microservices system?
+
+Event-driven vs REST?
+
+Data consistency across services?
+
+Migrating monolith to microservices?
+
+Security, logging, observability in production?
 
 
 
