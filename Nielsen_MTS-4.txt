@@ -22,3 +22,14 @@ The elevator system should efficiently handle user requests and optimize the mov
 The system should prioritize requests based on the direction of travel and the proximity of the elevators to the requested floor.
 The elevators should be able to handle multiple requests concurrently and process them in an optimal order.
 The system should ensure thread safety and prevent race conditions when multiple threads interact with the elevators.
+
+Round - 2:
+Explain the Intersting/Complex problem solved.
+
+LLD + HLD:
+Identify specific brand logos within these video feeds.
+Trigger an event or notification in near real-time (within a few seconds of the logo appearing).
+Store historical data about these brand exposures (e.g., brand, timestamp, duration, game ID).
+Provide an API for our front-end application to display these events.
+Scale to handle hundreds of concurrent live streams during major sporting events.
+
