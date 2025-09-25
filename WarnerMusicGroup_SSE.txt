@@ -1,0 +1,292 @@
+#WarnerMusicGroup
+
+Discussion with Recruiter on Experience, Current Job Roles and Responsibility, Why are you looking out for job change? etc
+
+Round 1: 90mins, CoderPad (Realworld Scenario Problem Solving);
+
+Below Data is Given Before the Interview:
+Context
+WMG distributes music to partners like Spotify via the concept of an Order, which represents
+an individual song. These Orders are delivered to partners in the form of Metadata (XML) and
+Assets (audio WAV, coverart TIFF, etc) files.
+What You Need to Do
+You will build an “Artifact Generation” client that ingests Orders from a queue, orchestrates the
+production of Metadata and Assets, along with their respective AssetDetails, and
+publishes the results for further processing. This happens via a series of JSON APIs,
+implemented in a testserver binary that you have been / will be provided. These APIs may
+not always reliable, and your client must handle failure correctly.
+Generally speaking, for each Order, you will:
+- take an Order from the queue
+- queue Asset generation
+- wait till it finishes, and then get Asset and AssetDetail data
+- queue Metadata generation
+- wait till it finishes, and then get Metadata data
+- bundle all the data together and submit it as a ShippableOrder
+Data Model
+The relationship between Orders, Assets, AssetDetails and Metadata is as follows:
+- An Order has 1:many Assets => An Asset belongs to a single Order
+- An Order has 1 Metadata => A Metadata belongs to a single Order
+- An Asset has 1 AssetDetail => An AssetDetail belongs to a single Asset
+Orchestration Requirements
+Specifically, there are some rules you must follow while processing each Order, as listed
+below:
+1. You must "take" an Order from the queue before doing anything else with it
+2. You must finish Asset generation before triggering any Metadata generation
+3. You must not trigger Metadata generation if Asset generation failed
+4. If Asset generation fails:
+● You must submit a FailedOrder without Asset/AssetDetail or Metadata
+data
+5. If Metadata generation fails:
+● You must submit a FailedOrder with Asset/AssetDetail data but without
+Metadata data
+6. If both Asset and Metadata generation succeed:
+● You must submit a ShippableOrder with both the Asset/AssetDetail data
+and Metadata data
+Tips
+1. There are no dependencies between Orders; the status/processing of one Order does
+not impact any other Order
+2. If you break the state machine by failing to follow the above orchestration rules, you
+cannot recover it
+3. If you submit an Order incorrectly (incorrect data/status), you cannot recover it
+
+// CODER PAD
+Setup Navigate to the Program Output tab (above this text) and locate the CoderPad Shell in the bottom right pane. 
+Run CHALLENGE=C0 ./run_server and check that it outputs challenge level set to C0. 
+Run the client you have been given by clicking the Run client button above the code editor. 
+Notice in the server logs that the score is 1.00%. Ctrl+C the testserver. 
+Notice how it can be stopped any time you want. 
+Add a print statement to the client file you have been given, and then rerun the testserver and then the client. 
+Notice how it now prints that out in the Program Output. You will be doing this loop of modify client, boot testserver, run client a lot. 
+Read the rest of the README very carefully. Expect to spend about 20 minutes just doing this. 
+If you have any clarifying questions, please ask your interviewer. 
+Context WMG distributes music to partners like Spotify via the concept of an Order, which represents an individual song. 
+These Orders are delivered to partners in the form of Metadata (XML) and Assets (audio WAV, coverart TIFF, etc) files. 
+What You Need to Do You will build an “Artifact Generation” client that ingests Orders from a queue, orchestrates the production of Metadata and Assets, 
+along with their respective AssetDetails, and publishes the results for further processing. This happens via a series of JSON APIs, 
+implemented in a testserver binary that you have been / will be provided. These APIs may not always be reliable, and your client must handle failure correctly. 
+Generally speaking, for each Order, you will: take an Order from the queue queue Asset generation wait till it finishes, and 
+then get Asset and AssetDetail data queue Metadata generation wait till it finishes, and then get Metadata data bundle all the data together and submit it as a 
+ShippableOrder Data Model The relationship between Orders, Assets, AssetDetails and 
+Metadata is as follows: 
+An Order has 1:many Assets => An Asset belongs to a single Order 
+An Order has 1 Metadata => A Metadata belongs to a single Order 
+An Asset has 1 AssetDetail => An AssetDetail belongs to a single Asset Orchestration Requirements Specifically, 
+there are some rules you must follow while processing each Order, as listed below: 
+You must “take” an Order from the queue before doing anything else with it You must finish Asset generation before triggering any Metadata generation 
+You must not trigger Metadata generation if Asset generation failed If Asset generation fails: 
+You must submit a FailedOrder without Asset/AssetDetail or Metadata data If Metadata generation fails: 
+You must submit a FailedOrder with Asset/AssetDetail data but without Metadata data If both Asset and Metadata generation succeed: 
+You must submit a ShippableOrder with both the Asset/AssetDetail data and Metadata data Tips There are no dependencies between Orders; 
+the status/processing of one Order does not impact any other Order If you break the state machine by failing to follow the above orchestration rules, 
+you cannot recover it If you submit an Order incorrectly (incorrect data/status), 
+you cannot recover it How You Will Do It testserver The testserver binary exposes an HTTP API you will call from your client, 
+through a given SDK (more on the same below). You can configure the testserver with an optional environment variable: 
+CHALLENGE: one of the 3 challenge levels to boot the server at - C0/C1/C2; more on challenge levels below, defaults to 
+C0 Note: ⚠️ The testserver seeds itself with a randomly generated test set of Orders and associated Asset/Metadata details on each startup. ⚠️ 
+It runs for exactly 1 minute after receiving the first API request before it automatically shuts down. You need to restart it every time you want to test the progress of your client. ⚠️ 
+It carries no state between runs, reseeding a new test set on every startup. ⚠️ During the 1 minute that it runs, your client will be tested along the dimensions of processing speed, 
+correctness and resilience by the different challenge levels below. ⚠️ It will print out your performance as a % based score every second until it shuts down or is killed using SIGINT (Ctrl-C). ⚠️ 
+You score 1% for every correctly submitted Order and lose 1.5% for every incorrectly submitted / Errored Order. For more details on scoring see FAQ.md. ⚠️ 
+You must successfully submit at least one Order (Shippable/Failed) to score any points. API & SDK sdk The API documentation of the testserver with a correct, 
+bug-free SDK that integrates against it have already been provided to you. Find this SDK in the sdk module/package/folder in the code browser. 
+The SDK takes care of formatting the HTTP requests, URLs, parameters etc. and also serializing/deserializing objects correctly. 
+The SDK includes object models as well, for your convenience. Your interaction with this SDK will mainly be to use it correctly according to the documented API spec in the SDK. ⚠️ 
+You still have to pay close attention to the API documentation to make sure that you are integrating with it correctly, through the SDK. ⚠️ 
+You do not need to modify this SDK to succeed in the challenge(s). However, you should feel free to modify/extend it to help you in anyway - including debugging, error handling etc. 
+SDK Methods There are a total of 10 API endpoints, with a method in the SDK for each of them. 
+They can be broadly grouped into 3 categories by concern - Ingestion (to do with taking Orders from a queue), 
+LegacyGeneration (to do with triggering and managing Asset/Metadata generation) and Submission (to do with submitting processed Orders). 
+Ingestion peek_orders: look at Order(s) in the queue, but do not take them take_orders: take Order(s) from the queue for processing Submission submit_shippable_order: 
+post an Order that successfully finished both Asset and Metadata generation submit_failed_order: post an Order that failed Asset or 
+Metadata generation LegacyGeneration queue_generate_assets: trigger Asset generation for an Order ⚠️ at higher challenge levels, the generation is 
+asynchronous and requires you to poll for completion get_assets: check on the status of 
+Asset generation for an Order and/or retrieve generated Assets for an Order get_assets_details: 
+retrieve the AssetDetails for the generated Assets for an Order queue_generate_metadata: trigger 
+Metadata generation for an Order ⚠️ at higher challenge levels, the generation is asynchronous and requires you to poll for completion get_metadata_status: 
+check on the status of Metadata generation for an Order get_metadata: retrieve generated Metadata for an Order status: return counts of Order grouped by their 
+OrderStatuses (more on the same below) Your client code will use all of these endpoints (status being informational/optional) to correctly orchestrate Order processing. 
+SDK & Order state machines Each Order is tracked by an internal state machine on the testserver using an 
+OrderStatus enum. The take_orders, submit_shippable_order, submit_failed_order, queue_generate_assets and queue_generate_metadata SDK methods modify this status as shown in the picture below. 
+The nodes represent states and the arrows represent SDK methods. 
+orchestration Takeable - before take_orders Taken - after take_orders AssetsGenQueued - after queue_generate_assets, until async generation completes AssetsGenComplete - after async Asset generation completes; 
+could have failed/succeeded MetadataGenQueued - after queue_generate_metadata, until async generation completes 
+MetadataGenComplete - after async Metadata generation completes; could have failed/succeeded SubmittedSuccess - after submit_shippable_order/submit_failed_order was called with all the 
+correct data; you want to get here SubmittedFailed - after submit_shippable_order/submit_failed_order was called with incorrect data; you do not want to get here Errored - 
+you have broken the state machine flow for this Order because of incorrect orchestration; you do not want to get here The status SDK method and/or the server logs output a 
+count across Orders grouped by OrderStatus. Challenge Levels The testserver can be booted in one of 3 levels - C0/C1/C2, each adding progressively more complications to the 
+challenge by making the testserver more erratic. 
+C0 C1 C2 #Shippable Orders 98 98 98 #Failed Orders due to Asset generation failure 1 1 1 #Failed Orders due to Metadata generation failure 1 1 1 
+#Assets per Order <=10 <=300 <1000 queue_generate_assets latency 0ms 0ms as documented queue_generate_metadata latency 0ms 0ms as 
+documented all other SDK call latencies 0ms as documented as documented Asset async generation time 0ms as documented as documented 
+Metadata async generation time 0ms as documented as documented async generation head-of-line-blocking / starvation No No Yes chance of random 500 errors. 
+500s are guaranteed to leave the server in a transactionally consistent state; i.e. you can expect that no processing has happened on the server side for that request and they are safe to retry. 
+No No Yes Client You have been provided a basic, working client that contains a barebones example implementation of the requisite orchestration. 
+You will need to modify this client code to create a better implementation that can achieve higher scores. You are also free to modify any of the rest of the code, 
+including the SDK and/or your environment by adding logging, checks and/or new dependencies etc. to help maximize your score. How You/We Will Evaluate 
+Your Performance 80% of your grade is derived from your best challenge level + score. Scoring higher at a lower challenge level is better than scoring lower at a higher challenge level, 
+but scoring the same is better at the higher challenge level. 20% of your grade is a function of your problem solving, program design and code organization (naming/readability/modularization). FAQ See FAQ.md
+
+
+// Given Code
+package client; import java.util.*; import java.util.stream.Collectors; import sdk.IngestionAPI; import sdk.LegacyGenerationAPI; import sdk.SubmissionAPI; 
+import sdk.models.Order; import sdk.models.Asset; import sdk.models.AssetDetail; import sdk.models.FailedAt; import sdk.models.FailedOrder; import sdk.models.FullAsset; 
+import sdk.models.Metadata; import sdk.models.ShippableOrder; 
+public class Client { 
+public static void main(String[] args) { final String baseUrl = "http://127.0.0.1:9200"; final IngestionAPI ingestion = new IngestionAPI(baseUrl); 
+final SubmissionAPI submission = new SubmissionAPI(baseUrl); final LegacyGenerationAPI legacy = new LegacyGenerationAPI(baseUrl); 
+try { System.out.println("start; server status:" + legacy.getStatus()); // ingestion Set<Order> peekedOrders = ingestion.peekOrders(1); Order peekedOrder = peekedOrders.iterator().next(); 
+List<String> references = new ArrayList<>(); references.add(peekedOrder.referenceNumber()); Set<Order> takenOrders = ingestion.takeOrders(references); 
+Order order = takenOrders.iterator().next(); // asset generation legacy.queueGenerateAssets(order.referenceNumber()); 
+Set<Asset> assets = legacy.getAssets(order.referenceNumber()); if (assets.isEmpty()) { FailedOrder failedOrder = new FailedOrder(order, FailedAt.FAILED_AT_ASSET, java.util.Optional.empty()); 
+submission.submitFailedOrder(failedOrder); // throw new RuntimeException("did asset generation complete? did it complete successfully?"); } 
+Set<Integer> assetIds = assets.stream() .map(Asset::assetId) .collect(Collectors.toSet()); 
+Set<AssetDetail> assetDetails = legacy.getAssetsDetails(assetIds); Map<Integer, AssetDetail> detailsMap = assetDetails.stream() .collect(Collectors.toMap(AssetDetail::assetId, detail -> detail)); 
+List<FullAsset> fullAssets = new ArrayList<>(); 
+for (Asset asset : assets) { AssetDetail detail = detailsMap.get(asset.assetId()); if (detail != null) { fullAssets.add(new FullAsset(asset, detail)); } } 
+// metadata generation legacy.queueGenerateMetadata(order.referenceNumber()); 
+String metadataStatus = legacy.getMetadataStatus(order.referenceNumber()); if (!metadataStatus.equals("SUCCESS")) 
+{ FailedOrder failedOrder = new FailedOrder(order, FailedAt.FAILED_AT_METADATA, Optional.of(fullAssets)); submission.submitFailedOrder(failedOrder); 
+// throw new RuntimeException("did metadata generation complete? did it complete successfully?"); } Set<String> orderReferences = new HashSet<>(); 
+orderReferences.add(order.referenceNumber()); Set<Metadata> metadatas = legacy.getMetadata(orderReferences); Metadata metadata = metadatas.iterator().next(); 
+// submission submission.submitShippableOrder(new ShippableOrder(order, fullAssets, metadata)); System.out.println("shippable order submitted; server status:" + legacy.getStatus()); } 
+catch (Exception e) { e.printStackTrace(); } } }
+
+// ChatGPT code
+package client;
+
+import java.util.*;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
+
+import sdk.IngestionAPI;
+import sdk.LegacyGenerationAPI;
+import sdk.SubmissionAPI;
+import sdk.models.*;
+
+public class Client {
+    public static void main(String[] args) {
+        final String baseUrl = "http://127.0.0.1:9200";
+        final IngestionAPI ingestion = new IngestionAPI(baseUrl);
+        final SubmissionAPI submission = new SubmissionAPI(baseUrl);
+        final LegacyGenerationAPI legacy = new LegacyGenerationAPI(baseUrl);
+
+        try {
+            System.out.println("Client started; server status: " + legacy.getStatus());
+
+            // Process orders until server shuts down
+            while (true) {
+                Set<Order> peekedOrders = ingestion.peekOrders(1);
+                if (peekedOrders.isEmpty()) {
+                    Thread.sleep(500); // no orders available, wait briefly
+                    continue;
+                }
+
+                Order peekedOrder = peekedOrders.iterator().next();
+                Set<Order> takenOrders = ingestion.takeOrders(Set.of(peekedOrder.referenceNumber()));
+                if (takenOrders.isEmpty()) {
+                    continue; // someone else took it
+                }
+                Order order = takenOrders.iterator().next();
+
+                processOrder(order, legacy, submission);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void processOrder(Order order, LegacyGenerationAPI legacy, SubmissionAPI submission) {
+        try {
+            String ref = order.referenceNumber();
+            System.out.println("Processing order " + ref);
+
+            // ---- Assets ----
+            legacy.queueGenerateAssets(ref);
+            Set<Asset> assets = pollAssets(legacy, ref);
+
+            if (assets == null || assets.isEmpty()) {
+                System.out.println("Asset generation failed for " + ref);
+                FailedOrder failed = new FailedOrder(order, FailedAt.FAILED_AT_ASSET, Optional.empty());
+                submission.submitFailedOrder(failed);
+                return; // stop here
+            }
+
+            // Fetch asset details
+            Set<Integer> assetIds = assets.stream().map(Asset::assetId).collect(Collectors.toSet());
+            Set<AssetDetail> assetDetails = legacy.getAssetsDetails(assetIds);
+            Map<Integer, AssetDetail> detailsMap = assetDetails.stream()
+                    .collect(Collectors.toMap(AssetDetail::assetId, d -> d));
+            List<FullAsset> fullAssets = assets.stream()
+                    .map(a -> new FullAsset(a, detailsMap.get(a.assetId())))
+                    .toList();
+
+            // ---- Metadata ----
+            legacy.queueGenerateMetadata(ref);
+            boolean metadataOk = pollMetadataStatus(legacy, ref);
+
+            if (!metadataOk) {
+                System.out.println("Metadata generation failed for " + ref);
+                FailedOrder failed = new FailedOrder(order, FailedAt.FAILED_AT_METADATA, Optional.of(fullAssets));
+                submission.submitFailedOrder(failed);
+                return; // stop here
+            }
+
+            Set<Metadata> metadatas = legacy.getMetadata(Set.of(ref));
+            Metadata metadata = metadatas.iterator().next();
+
+            // ---- Submit ----
+            submission.submitShippableOrder(new ShippableOrder(order, fullAssets, metadata));
+            System.out.println("Shippable order submitted for " + ref);
+
+        } catch (Exception e) {
+            System.err.println("Error processing order " + order.referenceNumber());
+            e.printStackTrace();
+        }
+    }
+
+    // Poll for assets until ready
+    private static Set<Asset> pollAssets(LegacyGenerationAPI legacy, String ref) throws Exception {
+        int attempts = 0;
+        while (attempts < 20) {
+            Set<Asset> assets = legacy.getAssets(ref);
+            if (!assets.isEmpty()) {
+                return assets;
+            }
+            TimeUnit.MILLISECONDS.sleep((long) Math.min(200 * Math.pow(2, attempts), 2000));
+            attempts++;
+        }
+        return Collections.emptySet();
+    }
+
+    // Poll for metadata until ready
+    private static boolean pollMetadataStatus(LegacyGenerationAPI legacy, String ref) throws Exception {
+        int attempts = 0;
+        while (attempts < 20) {
+            String status = legacy.getMetadataStatus(ref);
+            if ("SUCCESS".equals(status)) return true;
+            if ("FAILED".equals(status)) return false;
+            TimeUnit.MILLISECONDS.sleep((long) Math.min(200 * Math.pow(2, attempts), 2000));
+            attempts++;
+        }
+        return false;
+    }
+}
+
+// C1
+Got it 👍 — if your C1 score is low, that usually means:
+
+Throughput is too low → you’re only doing 1 order at a time, so in 1 minute you don’t finish enough.
+
+Async orchestration isn’t handled fully → in C1, asset & metadata generation are asynchronous, so you can’t just call getAssets() or getMetadataStatus() once. You must poll until completion (SUCCESS/FAILED).
+
+No concurrency → you need to process multiple orders in parallel; otherwise you spend the whole minute stuck on 1 long order.
+
+Possible premature submission → if you submit before generation finishes, the server marks it as incorrect → negative score.
+
+1. Poll until generation really completes
+2. Add concurrency
+3. Prioritize small orders first
+4. Retry transient failures
+5. Tune polling
+
