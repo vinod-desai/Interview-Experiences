@@ -1,0 +1,10 @@
+Wayfair - SSE - L4 IC
+
+Round - 1:
+Explain the current project and architecture.
+SQL vs NoSQL
+Microservices DP - Circuit Breaker, Retry, SAGA (Orchestrator, Choreography)
+
+DSA:
+https://leetcode.com/problems/add-strings/description/ (Add comma (,) after 3 digits in the result)
+
