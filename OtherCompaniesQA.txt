@@ -182,5 +182,30 @@ Migrating monolith to microservices?
 
 Security, logging, observability in production?
 
+ReactJS Coding:
+Requirements
+Clicking on the "Add" button adds a progress bar to the page.
 
+Each progress bar start filling up smoothly as soon as they're added
+
+Each bar takes approximately 2000ms to completely fill up.
+
+
+SQL;
+Course (CourseId, CourseName);
+Enrollment (StuId, CourseId);
+/StuId;
+SELECT A.CourseId, A.CourseName, E.StuId
+FROM Course A INNER JOIN Enrollment E ON E.CourseId = A.CourseId
+WHERE E.StuId = {stuId};
+
+HLD:
+Design Wallet (Payment Service)
+
+Java, Spring Boot:
+Java - Volatile, Semaphore
+Spring Boot - Initialization time optimisation, API security, (User Bank Account - Row Level), Transaction annotation, rollback, SQL Exception, Optimising the Services;
+Code Review;
+Spring Boot - Context, Beans, Container, AutoConfiguration, what happens when spring boot starts;
+Microservice Architecture;
 
