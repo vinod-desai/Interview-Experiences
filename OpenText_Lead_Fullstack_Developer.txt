@@ -1,0 +1,44 @@
+OpenText:
+Lead Software Engineer - Fullstack Development
+
+Round 1: Technical
+
+1. Implement Queue DataStructure using Stack DataStructure for Push and Pop operations.
+
+2. var statement="I am a fullstack web developer"; var colors = ['red', 'green', 'yellow'];
+Create HTML for each words in statement by using colors.
+ex: I -> red, am -> green, a -> yellow, fullstack -> red, web -> green, etc
+
+3. Grid rows * cols -> HTML for Displaying Numbers in below format.
+rows - 3, cols - 4;
+1 6 7 12
+2 5 8 11
+3 4 9 10
+
+4. Cookie and SessionID
+5. Local and Session Storage
+6. Storing Session Data in distributed systems or in multi-instance environments
+7. var arr = [1, 2, 3]; for(var i = 0; i < 3; i++) { setTimeout(() => console.log(arr[i]), 300) } // undefined
+
+Round 2: Technical
+
+1. Explain the Architecture of Current Project (Covers FE, Microfrontends, API Gateway, Microservices - Circuit Breaker, Retry, SAGA, Database, Message Queues, Cache, CDN, Service Worker, etc)
+2. Explain the complex project/feature worked on?
+3. sum(3)(5); -> 8
+4. Longest Palindromic Substring https://leetcode.com/problems/longest-palindromic-substring/description/
+5. Explain JS Event Loop - Promise, SetTimeout
+6. SSO, Load Balancing, API Gateway, Cookie, JWT, Session/Local Storage, Caching, Message Queues, Auto Scaling, etc and Other Design Concepts
+
+Round 3: Technical
+
+1. Explain Monolith Application
+2. Explain Microservices
+3. Explain Microfrontends
+4. Design System Like Youtube, Tech Stack Decisions, Blob/FTP for Video Blob files
+5. Explain the concepts with Why, What reasons.
+
+Round 4: Manager Round
+1. Upload File Storage System, Extract Metadata, Put it in Elastic Search DB for querying.
+
+Round 5: Director Round
+1. ConfigMap based K8S - This means you can update configuration without rebuilding or redeploying your application images. https://kubernetes.io/docs/concepts/configuration/configmap/
