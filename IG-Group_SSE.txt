@@ -1,0 +1,193 @@
+IG Group:
+SSE - Java TypeScript AWS
+
+Round - 1: Java and AWS
+
+// I do not know what I am doing!!
+
+@Bean
+
+public class CustomeCache {
+
+  // private static final List<String> cache = new ArrayList<>(); -> what is the issue, memory leakage;
+	private CustomeCache instance = null;
+	
+	private CustomeCache() {
+	}
+	
+	public static CustomeCache getInstance(){
+		
+		if(instance == null){
+			instance = new CustomeCache();
+		}
+		
+		return instance;
+	}
+
+    private HashMap<T1, T2> cache = new LinkedHashMap<>();
+	
+	int SIZE = 1000;
+	
+	// synchronized, collection.synchronized;
+    public void add(T1 key, T2 value) {
+        cache.add(data);
+    }
+	
+	public T2 get() {
+		
+	}
+	
+}
+
+oldest entry removed; -> LRU;
+
+
+Deployed -> ECS Fargate -> AutoScaling; multiple instance - chacheService
+
+
+cache1 - cache2; 
+
+Range1,2,3 - []; Redis Distributed Cache;
+
+Command Query - CQRS;
+
+
+Singleton;
+Facotry; 
+Adopter;
+Facade;
+Publish/Sub;
+Builder;
+Repositry;
+Strategy;
+
+Factory vs Strategy;
+
+
+Circuit Breaker -> Retry -> Saga - Choregraphy;
+
+Event Driven; Kafka Message Broker;
+
+
+JavaScript/TypeScript;
+
+ES2025;
+
+Es6;
+
+JSON -> 
+
+userObj: User = {
+  name, 
+  id, 
+  address {
+		line1, line2, line3, city, state, country, pincode
+	}, 
+	personalInfo {firstName, lastName, prefferredName}
+}
+
+userObj.address.line2?city;
+
+any, unkown;
+
+type vs interfaces;
+
+const val = multiply(2)(3)(4); // 24 -> multiply(2); -> 2;  multiply(2)(3)(4); -> 6
+ 
+ function multiply(a){
+	
+	return function (b) {
+		if(b) {
+			return multiply(a * b); 
+		} else {
+			return a;
+		}
+	
+	}
+ }
+ 
+ grant type in oauth2;
+ oauth2 working; SSO working;
+ identity providers -> SAML, Google, OpenID, Microsoft Entra ID, Facebook etc
+
+Round 2 - TypeScript
+
+REST API using NodeJS, TypeScript, ExpressJS for GET, POST, PUT, DELETE Operations (Controller -> Service -> Repository)
+
+
+Preparations QA:
+1. Java (Core + Advanced)
+
+Difference between HashMap, ConcurrentHashMap, and SynchronizedMap?
+
+How does Java Garbage Collection work?
+
+Volatile vs Synchronized vs Atomic Classes?
+
+How does CompletableFuture work?
+
+How do you detect and fix memory leaks?
+
+Scenario: Process millions of records efficiently in memory?
+
+2. Caching (Advanced)
+
+How would you cache frequently accessed slow DB endpoints?
+
+LRU Cache Implementation?
+
+Compare in-memory vs distributed cache?
+
+3. Spring Boot & Microservices
+
+How do you design a fault-tolerant microservice?
+
+Distributed transactions in microservices?
+
+Asynchronous processing in Spring Boot?
+
+Logging & monitoring?
+
+Scenario: Slow service affecting others?
+
+REST API design?
+
+4. REST API
+
+How to design REST APIs for high concurrency and low latency?
+
+How to secure REST APIs?
+
+How to handle large payloads?
+
+What is HATEOAS?
+
+5. AWS Basics
+
+High availability deployment strategy?
+
+Vertical vs Horizontal scaling?
+
+EC2 instance memory issue?
+
+Storage for large objects/files?
+
+6. TypeScript (Basic / Minimal)
+
+TypeScript vs JavaScript?
+
+Typing unknown JSON?
+
+Interfaces vs types?
+
+7. Design & Architecture 
+
+How do you design a scalable microservices system?
+
+Event-driven vs REST?
+
+Data consistency across services?
+
+Migrating monolith to microservices?
+
+Security, logging, observability in production?
