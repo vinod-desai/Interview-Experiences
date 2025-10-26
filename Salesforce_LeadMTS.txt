@@ -1,0 +1,19 @@
+Company - Salesforce
+Role - Lead MTS
+
+Round - 1: OA, Platform - HackerRank (Elimination Round)
+1. arr = [[0, 5], [2, 7], [1, 10], [3, 18]]; arr[i][0] -> ProcessIds (0 to 25, 0 -> a, 1 -> b, etc), arr[i][1] -> Time taken to finish the Process; return the processId that has executed continuously for maxTime;
+t = 0, 0 -> 5 - 0 units
+t = 5, 2 -> 7 - 5 = 2 units
+t = 7, 1 -> 10 - 7 = 3 units
+t = 10, 3 -> 18 - 10 = 8 units
+
+Answer is - ProcessId = 3, char = 'd';
+
+2. nums = [4, 2, 3, 1, 5], k = 2; return kth largest element for all subarrays 0 <= i <= k - 1; output = [2, 3, 3, 4];
+[4, 2] -> 2nd Largest Element 2; output = [2];
+[4, 2, 3] -> 2nd Largest Element 3; output = [2, 3];
+[4, 2, 3, 1] -> 2nd Largest Element 2; output = [2, 3, 3];
+[4, 2, 3, 1, 5] -> 2nd Largest Element 2; output = [2, 3, 3, 4];
+return output = [2, 3, 3, 4];
+
