@@ -1,0 +1,19 @@
+Company - Macquarie Group
+
+Round - 1:
+1. Explain Architecture of Current/Previous Project end to end with tech stack, decisions, trade-offs, etc
+2. Build Simple CRUD Operations - UI, REST APIs, Database
+ex - user name; emailId, ph number;
+application type - loan; dropdown
+type of loan - home loan, personal loan; - dropdown;
+amount - 200; - number fied;
+emi-amount - 20;
+tenure-years - 1yr;
+
+UI - ReactJS
+REST APIs - Java/Spring Boot, Open API Swagger
+Database
+
+3. How are you using AI, How it is helping in your day to day productivity?
+4. Have you leveraged AI in your projects?
+5. Day to Day roles and responsibilities.
