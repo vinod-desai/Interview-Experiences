@@ -1,0 +1,16 @@
+Company - eBay
+Online Assessments, Platform - CodeSignal
+
+General Coding Assesment - 1hr
+4 DSA Questions Easy Level;
+
+1. InitialRating = 1500; ratings = [100, 400, -100, -400, 100];
+return MaxRating and CurrentRating; // 1900, 1600
+
+2. a = "99" b = "99" -> sum = "1818", a = "99" b = "9" -> sum = "918"
+
+3. memories = [1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0], SEGMENT_SIZE = 8, Perform Allocate(X) and Erase(Id) operations;
+
+4. house = []; queries[2, 0, 3]; return consecutive numberOfHouse; result = [1, 1, 2];
+
+Industry Coding Assessment - 1hr
