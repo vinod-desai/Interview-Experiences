@@ -1,0 +1,126 @@
+Company - Nextiva
+Role - Tech Lead (ReactJS)
+
+function doSomething(){
+   console.log(this);
+}
+doSomething();
+
+var obj = {
+ 
+ name: "John",
+ getName: function(x){
+    return this.name +" "+x;
+ }
+}
+
+var c = obj.getName;
+ 
+c("abc");
+ 
+
+var obj2 = {
+name:"Suraj"
+}
+ 
+var a=10;
+function test(){
+    console.log(a); 
+    var a=20;
+    console.log(a);
+}
+test();
+console.log(a)
+ 
+ 
+ let x = [1, 2, 3];
+let y = [1, 2, 3];
+let z = y;
+ 
+console.log(x == y);
+console.log(x === y);
+console.log(z == y);
+console.log(z == x)
+
+let a = {};
+let b = { key: "b" };
+let c = { key: "c" };
+ 
+a[b] = 123;
+a[c] = 456;
+console.log(a[b]);
+
+class Chameleon {
+  static colorChange(newColor) {
+    this.newColor = newColor;
+    return this.newColor;
+  }
+ 
+  constructor({ newColor = 'green' } = {}) {
+    this.newColor = newColor;
+  }
+}
+const freddie = new Chameleon({ newColor: 'purple' });
+console.log(freddie.colorChange('orange'));
+
+console.log("Start");
+ 
+setTimeout(() => {
+  console.log("Timeout");
+}, 0);
+ 
+Promise.resolve().then(() => {
+  console.log("Promise");
+});
+ 
+console.log("End");
+
+// fn (str) -> return true/false;
+// check str = balanced Parenthis or not
+// (), [], {}
+// [{({})}]{}() -> true;
+
+// [{]} -> false;
+
+function checkBalancedParenthis(str){
+
+    const n = str.length;
+    const stack = [];
+
+    for(let i = 0; i < n; i++){
+        if(str[i] === '(' || str[i] === '[' || str[i] === '{'){
+            stack.push(str[i]);
+        } else {
+            if(stack.length === 0){
+                return false;
+            }
+            const top = stack[stack.length - 1];
+            if(str[i] === ')' && top === '('){
+                stack.pop();
+            } else if(str[i] === ']' && top === '['){
+                stack.pop();
+            } else if(str[i] === '}' && top === '{'){
+                stack.pop();
+            } else {
+                return false;
+            }
+        }
+    }
+
+    return stack.length === 0;
+}
+
+
+console.log(checkBalancedParenthis("[{({})}]{}()"));
+console.log(checkBalancedParenthis("[{]}"));
+
+React:
+Pure Components
+HOC examples
+useEffect, useCallback, useMemo;
+Redux - Immutable
+Redux Connect - HOC
+React.memo vs useMemo
+useEffect, Class Component - componentDidUnmount;
+React Component Optimisation;
+How we connect Redux with React Components;
