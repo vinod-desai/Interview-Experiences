@@ -16,4 +16,178 @@ queries[0] = 2, house = [0, 0, 1, 0]; result = [1]
 queries[1] = 0, house = [1, 0, 1, 0]; result = [1, 1]
 queries[1] = 3, house = [1, 0, 1, 1]; result = [1, 1, 2]
 
-Industry Coding Assessment - 1hr
+Industry Coding Assessment - 1hr (Score - 470/600)
+Implement Simple Versions of In-Memory Database.
+Level 1 - set, compareAndSet, compareAndDelete, get operations.
+Level 2 - scan, scanByPrefix operations
+Level 3 - setWithTTL, compareAndSetWithTTL operations
+Level 4 - get values by timeStamp values
+
+package com.codesignal.inmemorydb;
+
+import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.HashMap;
+import java.util.Optional;
+
+class InMemoryDBImpl implements InMemoryDB {
+  
+  private Map<String, Map<String, DataField>> db = new HashMap<>();
+  
+  public InMemoryDBImpl() {
+    // TODO: implement
+  }
+  
+  public void set(int timestamp, String key, String field, int value){
+    if(db.containsKey(key)){
+      Map<String, DataField> val = db.get(key);
+      val.put(field, new DataField(value, 0));
+    } else {
+      Map<String, DataField> data = new HashMap<>();
+      data.put(field, new DataField(value, 0));
+      db.put(key, data);
+    }
+  }
+  
+  public boolean compareAndSet(int timestamp, String key, String field, int expectedValue, int newValue){
+    boolean returnValue = false;
+    if(!db.containsKey(key)){
+      return returnValue;
+    }
+    Map<String, DataField> data = db.get(key);
+    if(!data.containsKey(field)){
+      return returnValue;
+    }
+    DataField df = data.get(field);
+    if(df.value != expectedValue){
+      return returnValue;
+    }
+    if(df.ttl != 0 && timestamp > df.ttl){
+      return returnValue;
+    }
+    data.put(field, new DataField(newValue, 0));
+    db.put(key, data);
+    returnValue = true;
+    return returnValue;
+  }
+  
+  public boolean compareAndDelete(int timestamp, String key, String field, int expectedValue){
+    boolean returnValue = false;
+    if(!db.containsKey(key)){
+      return returnValue;
+    }
+    Map<String, DataField> data = db.get(key);
+    if(!data.containsKey(field)){
+      return returnValue;
+    }
+    DataField df = data.get(field);
+    if(df.value == expectedValue){
+      data.remove(field);
+      returnValue = true;
+    }
+    return returnValue;
+  }
+  
+  public Optional<Integer> get(int timestamp, String key, String field){
+    Optional<Integer> returnValue = Optional.empty();
+    
+    if(!db.containsKey(key)){
+      return returnValue;
+    }
+    Map<String, DataField> data = db.get(key);
+    if(!data.containsKey(field)){
+      return returnValue;
+    }
+    DataField df = data.get(field);
+    if(df.ttl != 0 && df.ttl <= timestamp){
+      return returnValue;
+    }
+    return Optional.of(df.value);
+  }
+  
+  public List<String> scan(int timestamp, String key){
+    List<String> list = new ArrayList<>();
+    
+    if(!db.containsKey(key)){
+      return list;
+    }
+    
+    Map<String, DataField> data = db.get(key);
+    for(Map.Entry<String, DataField> entry : data.entrySet()){
+      if(entry.getValue().ttl != 0 && timestamp > entry.getValue().ttl){
+        continue;
+      }
+      String str = entry.getKey() + "(" + entry.getValue().value + ")";
+      list.add(str);
+    }
+    list.sort((a, b) -> a.compareTo(b));
+    return list;
+  }
+  
+  public List<String> scanByPrefix(int timestamp, String key, String prefix){
+    List<String> list = new ArrayList<>();
+    
+    if(!db.containsKey(key)){
+      return list;
+    }
+    
+    Map<String, DataField> data = db.get(key);
+    for(Map.Entry<String, DataField> entry : data.entrySet()){
+      if(entry.getKey().startsWith(prefix)){
+        if(entry.getValue().ttl != 0 && timestamp > entry.getValue().ttl){
+          continue;
+        }
+        String str = entry.getKey() + "(" + entry.getValue().value + ")";
+        list.add(str);
+      }
+    }
+    list.sort((a, b) -> a.compareTo(b));
+    return list;
+  }
+  
+  public void setWithTTL(int timestamp, String key, String field, int value, int ttl) {
+    if(db.containsKey(key)){
+      Map<String, DataField> val = db.get(key);
+      val.put(field, new DataField(value, timestamp + ttl));
+    } else {
+      Map<String, DataField> data = new HashMap<>();
+      data.put(field, new DataField(value, timestamp + ttl));
+      db.put(key, data);
+    }
+  }
+  
+  public boolean compareAndSetWithTTL(int timestamp, String key, String field, int expectedValue, int newValue, int ttl){
+    boolean returnValue = false;
+    if(!db.containsKey(key)){
+      return returnValue;
+    }
+    Map<String, DataField> data = db.get(key);
+    if(!data.containsKey(field)){
+      return returnValue;
+    }
+    DataField df = data.get(field);
+    if(df.value != expectedValue){
+      return returnValue;
+    }
+    if(df.ttl != 0 && timestamp > df.ttl){
+      return returnValue;
+    }
+    data.put(field, new DataField(newValue, timestamp + ttl));
+    db.put(key, data);
+    returnValue = true;
+    return returnValue;
+  }
+  
+  class DataField {
+    int value;
+    int ttl;
+    public DataField(int value, int ttl){
+      this.value = value;
+      this.ttl = ttl;
+    }
+  }
+  // TODO: implement interface methods here
+}
+
+
