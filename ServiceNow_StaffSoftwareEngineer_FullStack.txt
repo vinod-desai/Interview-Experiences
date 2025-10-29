@@ -1,0 +1,69 @@
+Company - Service Now
+Role - Staff Software Engineer - Full Stack
+
+Round - 1: DSA/Problem Solving;
+Expectations - Write Production Ready Code, Should be able to test the code by dry run example
+
+Question - https://leetcode.com/problems/max-area-of-island/description/ - Return the maximum area of island
+
+function getMaximumArea(grid) {
+    const rows = grid.length;
+    const cols = grid[0].length;
+    let max = 0;
+    const diffRow = [-1, 0, 1, 0];
+    const diffCol = [0, 1, 0, -1];
+    const visited = [];
+    for (let i = 0; i < rows; i++) {
+        visited[i] = [];
+        for (let j = 0; j < cols; j++) {
+            visited[i][j] = 0;
+        }
+    }
+    for (let i = 0; i < rows; i++) {
+        let currentMax = 0;
+        for (let j = 0; j < cols; j++) {
+            if (visited[i][j] === 0) {
+                currentMax = 1 + getMax(grid, rows, cols, i, j, grid[i][j], diffRow, diffCol, visited);
+                max = Math.max(max, currentMax);
+            }
+        }
+    }
+    return max;
+}
+
+function getMax(grid, rows, cols, i, j, colorValue, diffRow, diffCol, visited) {
+    if (isNotValid(rows, cols, i, j)) {
+        return 0;
+    }
+    visited[i][j] = 1;
+    let sum = 0;
+    for (let idx = 0; idx < 4; idx++) {
+        const newR = diffRow[idx] + i;
+        const newC = diffCol[idx] + j;
+        if (!isNotValid(rows, cols, newR, newC) && visited[newR][newC] === 0 && grid[newR][newC] === colorValue) {
+            sum += 1 + getMax(grid, rows, cols, newR, newC, colorValue, diffRow, diffCol, visited);
+        }
+    }
+    return sum;
+}
+
+function isNotValid(rows, cols, i, j) {
+    return i < 0 || i >= rows || j < 0 || j >= cols;
+}
+
+// const grid = [
+//     [0, 0, 1, 2], 
+//     [0, 1, 3, 0], 
+//     [1, 1, 3, 1]
+// ]; // 3 * 4;
+
+// const grid = [
+//     [1, 1, 2, 2],
+//     [1, 1, 2, 1],
+//     [2, 1, 1, 1],
+//     [3, 1, 4, 4]
+// ];
+
+const grid = [[1]];
+
+console.log(getMaximumArea(grid));
