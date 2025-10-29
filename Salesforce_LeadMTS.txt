@@ -1,6 +1,19 @@
 Company - Salesforce
 Role - Lead MTS
 
+Interview Process and Details:
+Online_Hacker Rank ( Elimination Round)
+Round 1 (Coding) 60 Minutes - Problem Solving, DS, Algo's. Will check how you are gathering the requirements after listening to the problem statement (They will cover two problem statements in the round). It's an elimination round.Observations from the panel: Code quality, approach, problem solving skills, alternative methods, production ready code, how well the candidate understood the DS and algos and were able to decide the best fit.
+
+After which, Round 2 (Design) 90 minutes - Which may also cover 1 Coding if required + 1 design problem statement on LLD, HLD and current system design understanding. How well you are able to build your business logic and use all the components required. Observations from the panel: How the candidate is able to collect the required inputs before approaching the problem statement, design approach, how you are preparing the design documents, In depth understanding about your current product (Feature/Application etc.,), design patterns you use and so on.,
+
+Round 3 (System Design_Deep Dive) 90 Minutes - 1 design problem statement (Complex) to under your expertise on HLD and dive deep by making the same problem into complex. How well you are able to build your business logic and use all the components required. Deep dive on how you can build scalable systems. Observations from the panel: How well the candidate is able to articulate the solutions provided in the current work/any recent projects. Collecting the requirements before the approach, the solution provided is a scalable one, where you are able to think from a larger product perspective when you are constructing the solution, security nuances, quality of the design, Interest towards working on UI development if required or necessary.
+NOTE: Database Designing, Data Modelling, Schema Designing and query tuning (Multiple tables). They are looking for engineering who worked on maximum capacity of the tables in DB
+
+Round 4: The Hiring Manager round will cover the behaviour skills, how well that you are able to handle stakeholders and why you would like to move from your current organisation and why salesforce? Also, your contribution towards team mentoring, code reviews, quality assurance etc., Observations from the panel: How well the candidate is able to articulate the solutions provided in the current work/any recent projects. Candidate is ready to work hands on code whenever necessary, reasons for job changes, behaviour and so on.,
+
+NOTE: Please go through the Salesforce site, understand about the Salesforce Product
+
 Round - 1: OA, Platform - HackerRank (Elimination Round)
 1. arr = [[0, 5], [2, 7], [1, 10], [3, 18]]; arr[i][0] -> ProcessIds (0 to 25, 0 -> a, 1 -> b, etc), arr[i][1] -> Time taken to finish the Process; return the processId that has executed continuously for maxTime;
 t = 0, 0 -> 5 - 0 units
